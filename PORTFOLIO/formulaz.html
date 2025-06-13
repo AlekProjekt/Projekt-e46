@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Formularz kontaktowy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #0d0d0d;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2rem;
+      max-width: 600px;
+    }
+
+    form {
+      background-color: #1a1a1a;
+      padding: 30px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+    }
+
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: 600;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      background-color: #2a2a2a;
+      border: 1px solid #444;
+      color: #fff;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #888;
+      outline: none;
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 12px 20px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #555;
+    }
+
+    .error {
+      color: #ff5c5c;
+      font-size: 0.9rem;
+      margin-top: 5px;
+    }
+    footer {
+      background-color: #1a1a1a;
+      color: white;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      padding: 15px 10px;
+    }
+
+    footer a button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      background-color: #333;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    footer a button:hover {
+      background-color: #555;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      form {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Masz jakieś pytania lub propozycje? PISZ!</h1>
+
+  <form id="contactForm" onsubmit="return validateForm()">
+    <label for="name">Imię:</label>
+    <input type="text" id="name" name="name" />
+    <div id="nameError" class="error"></div>
+
+    <label for="email">E-mail:</label>
+    <input type="text" id="email" name="email" />
+    <div id="emailError" class="error"></div>
+
+    <label for="message">Wiadomość:</label>
+    <textarea id="message" name="message" rows="5"></textarea>
+    <div id="messageError" class="error"></div>
+
+    <button type="submit">Wyślij</button>
+  </form>
+
+  <script>
+    function validateForm() {
+      let valid = true;
+
+      document.getElementById('nameError').innerText = "";
+      document.getElementById('emailError').innerText = "";
+      document.getElementById('messageError').innerText = "";
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+
+      if (name === "") {
+        document.getElementById('nameError').innerText = "Proszę podać imię.";
+        valid = false;
+      }
+
+      if (!emailRegex.test(email)) {
+        document.getElementById('emailError').innerText = "Proszę podać poprawny adres e-mail.";
+        valid = false;
+      }
+
+      if (message === "") {
+        document.getElementById('messageError').innerText = "Proszę wpisać wiadomość.";
+        valid = false;
+      }
+
+      return valid;
+    }
+  </script>
+  <footer>
+    <a href="index.html"><button>Powrót</button></a>
+  </footer>
+</body>
+</html>
